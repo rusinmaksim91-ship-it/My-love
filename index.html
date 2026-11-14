@@ -1,0 +1,721 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Максим и Даша — История нашей любви</title>
+
+    <!-- Шрифты Editorial Romance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Стили -->
+    <style>
+        :root {
+            --cream-50: #FDFBF7;
+            --cream-100: #F8F3EA;
+            --cream-200: #EFE5D5;
+            --blush-50: #FDF6F6;
+            --blush-100: #F7E7E6;
+            --blush-200: #EED2D0;
+            --blush-300: #E2B4B7;
+            --blush-400: #D89A9E;
+            --blush-500: #B97378;
+            --sage-50: #F4F6F3;
+            --sage-100: #E5EAE3;
+            --sage-400: #8FA38B;
+            --sage-600: #647860;
+            --gold-400: #C5A059;
+            --gold-500: #B08B43;
+            --gold-600: #917031;
+            --charcoal-700: #4A4441;
+            --charcoal-800: #332E2C;
+            --charcoal-900: #1F1C1A;
+            --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+            --font-sans: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { background-color: var(--cream-50); color: var(--charcoal-800); font-family: var(--font-sans); line-height: 1.6; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+        .hidden { display: none !important; }
+        .flex { display: flex !important; }
+        .font-serif { font-family: var(--font-serif); }
+        .italic { font-style: italic; }
+
+        .paper-texture {
+            background-image: radial-gradient(rgba(197, 160, 89, 0.16) 1px, transparent 0);
+            background-size: 26px 26px;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(239, 229, 213, 0.9);
+            border-radius: 28px;
+            box-shadow: 0 10px 30px rgba(51, 46, 44, 0.04);
+        }
+
+        .bg-decor { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.65; }
+        .blob-1 { top: -80px; left: -80px; width: 320px; height: 320px; background: var(--blush-100); }
+        .blob-2 { top: 35%; right: -100px; width: 360px; height: 360px; background: var(--cream-200); }
+        .blob-3 { bottom: -100px; left: 20%; width: 380px; height: 380px; background: var(--sage-100); }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            border: none; border-radius: 9999px; font-family: var(--font-sans); font-weight: 500; cursor: pointer; text-decoration: none; transition: all 0.25s ease;
+        }
+        .btn:active { transform: scale(0.97); }
+        .btn-dark { background: var(--charcoal-900); color: var(--cream-50); padding: 14px 28px; font-size: 14px; box-shadow: 0 6px 18px rgba(31, 28, 26, 0.15); }
+        .btn-dark:hover { background: var(--charcoal-800); }
+        .btn-blush { background: var(--blush-400); color: #ffffff; padding: 10px 20px; font-size: 13px; box-shadow: 0 4px 12px rgba(216, 154, 158, 0.3); }
+        .btn-blush:hover { background: var(--blush-500); }
+        .btn-outline { background: #ffffff; color: var(--charcoal-800); border: 1px solid var(--blush-200); padding: 13px 26px; font-size: 14px; }
+        .btn-outline:hover { background: var(--blush-50); }
+        .btn-icon {
+            width: 40px; height: 40px; border-radius: 50%; background: #ffffff; border: 1px solid var(--cream-200); color: var(--charcoal-700);
+            display: inline-flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s;
+        }
+        .btn-icon:hover { background: var(--cream-100); }
+
+        .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 40; background: rgba(253, 251, 247, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--cream-200); }
+        .header-inner { max-width: 1120px; margin: 0 auto; padding: 0 16px; height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+        .logo-link { font-family: var(--font-serif); font-size: 28px; font-weight: 600; color: var(--charcoal-900); text-decoration: none; }
+        .logo-link span { color: var(--blush-400); font-style: italic; font-weight: 400; }
+
+        .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 9999px; background: var(--sage-50); border: 1px solid var(--sage-100); font-size: 11px; font-weight: 500; color: var(--sage-600); }
+        .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold-400); }
+
+        .desktop-nav { display: none; align-items: center; gap: 28px; }
+        .desktop-nav a { text-decoration: none; font-size: 14px; font-weight: 500; color: var(--charcoal-700); transition: color 0.2s; }
+        .desktop-nav a:hover { color: var(--blush-500); }
+
+        .header-actions { display: flex; align-items: center; gap: 8px; }
+        .mobile-menu-panel { background: var(--cream-50); border-bottom: 1px solid var(--cream-200); padding: 16px 24px; display: flex; flex-direction: column; gap: 12px; }
+        .mobile-menu-panel a, .mobile-menu-panel button { text-align: left; background: none; border: none; font-family: var(--font-sans); font-size: 15px; font-weight: 500; color: var(--charcoal-700); text-decoration: none; padding: 6px 0; cursor: pointer; }
+
+        .access-overlay { position: fixed; inset: 0; z-index: 60; display: flex; align-items: center; justify-content: center; padding: 16px; background: rgba(253, 251, 247, 0.97); backdrop-filter: blur(16px); transition: opacity 0.4s ease; }
+        .access-box { max-width: 420px; width: 100%; padding: 36px 28px; text-align: center; }
+        .heart-badge { width: 56px; height: 56px; border-radius: 18px; background: var(--blush-100); color: var(--blush-500); display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+
+        main { position: relative; z-index: 10; padding-top: 68px; }
+        .container { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+        .hero-section { min-height: 85vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 64px 16px; }
+        .pill-tag { display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 9999px; background: rgba(255, 255, 255, 0.9); border: 1px solid var(--blush-200); font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold-600); font-weight: 600; margin-bottom: 20px; }
+        .hero-title { font-family: var(--font-serif); font-size: clamp(46px, 9vw, 84px); font-weight: 600; color: var(--charcoal-900); line-height: 1.08; margin-bottom: 16px; }
+        .hero-title span { color: var(--blush-400); font-style: italic; font-weight: 400; }
+        .hero-subtitle { font-family: var(--font-serif); font-style: italic; font-size: clamp(22px, 4vw, 30px); color: var(--gold-600); margin-bottom: 18px; }
+        .hero-desc { max-width: 640px; margin: 0 auto 32px; font-size: 15px; color: var(--charcoal-700); font-weight: 300; line-height: 1.75; }
+        .hero-buttons { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+
+        .section-block { padding: 72px 0; }
+        .section-header { text-align: center; max-width: 620px; margin: 0 auto 48px; }
+        .section-kicker { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.25em; color: var(--blush-500); font-weight: 600; margin-bottom: 8px; }
+        .section-title { font-family: var(--font-serif); font-size: clamp(32px, 5vw, 48px); font-weight: 600; color: var(--charcoal-900); line-height: 1.15; }
+
+        .dates-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .date-card { padding: 28px 24px; border-top: 4px solid var(--gold-400); }
+        .date-card.blush-border { border-top-color: var(--blush-400); }
+        .date-card-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 18px; }
+        .date-badge { display: inline-block; padding: 4px 12px; border-radius: 9999px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+        .badge-gold { background: var(--cream-100); color: var(--gold-600); }
+        .badge-blush { background: var(--blush-100); color: var(--blush-500); }
+        .date-heading { font-family: var(--font-serif); font-size: 30px; font-weight: 600; color: var(--charcoal-900); }
+        .date-quote { font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--charcoal-700); }
+
+        .summary-pill { text-align: center; padding: 10px 16px; border-radius: 16px; font-size: 13px; font-weight: 500; margin: 18px 0 14px; }
+        .summary-gold { background: var(--cream-100); color: var(--gold-600); }
+        .summary-blush { background: var(--blush-100); color: var(--blush-500); }
+
+        .timer-boxes { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; text-align: center; }
+        .timer-unit { background: #ffffff; border: 1px solid var(--cream-200); border-radius: 18px; padding: 12px 6px; }
+        .timer-num { font-family: var(--font-serif); font-size: 28px; font-weight: 700; color: var(--charcoal-900); line-height: 1.1; }
+        .timer-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--charcoal-700); margin-top: 4px; }
+
+        .story-bg { background: linear-gradient(180deg, var(--cream-50) 0%, var(--blush-50) 50%, var(--cream-50) 100%); }
+        .quote-banner { max-width: 760px; margin: 0 auto 48px; padding: 36px 24px; text-align: center; }
+        .quote-banner blockquote { font-family: var(--font-serif); font-style: italic; font-size: clamp(22px, 3.5vw, 30px); color: var(--charcoal-900); line-height: 1.45; margin: 12px 0 18px; }
+        .chapters-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .chapter-card { background: rgba(255, 255, 255, 0.9); border: 1px solid var(--cream-200); border-radius: 26px; padding: 28px; box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
+        .chapter-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+        .roman-circle { width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 20px; font-weight: 700; }
+
+        .gallery-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 32px; }
+        .filter-group { display: inline-flex; padding: 4px; border-radius: 9999px; background: var(--cream-100); border: 1px solid var(--cream-200); }
+        .filter-btn { border: none; background: transparent; padding: 7px 16px; border-radius: 9999px; font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--charcoal-700); cursor: pointer; transition: all 0.2s; }
+        .filter-btn.active-filter { background: #ffffff; color: var(--charcoal-900); box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+
+        .memories-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+        .memory-card { background: #ffffff; border: 1px solid var(--cream-200); border-radius: 26px; overflow: hidden; box-shadow: 0 6px 20px rgba(51, 46, 44, 0.04); display: flex; flex-direction: column; }
+        .memory-media-wrap { position: relative; width: 100%; height: 240px; background: var(--cream-100); overflow: hidden; cursor: pointer; }
+        .memory-media-wrap img, .memory-media-wrap video { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .memory-body { padding: 22px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .memory-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+        .memory-date { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-600); }
+        .memory-title { font-family: var(--font-serif); font-size: 24px; font-weight: 600; color: var(--charcoal-900); margin-bottom: 8px; cursor: pointer; }
+        .memory-caption { font-size: 14px; color: var(--charcoal-700); font-weight: 300; line-height: 1.6; }
+        .memory-footer { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--cream-100); display: flex; align-items: center; justify-content: space-between; }
+
+        .form-group { margin-bottom: 16px; text-align: left; }
+        .form-label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--charcoal-700); margin-bottom: 6px; }
+        .form-input, .form-textarea { width: 100%; padding: 12px 16px; border-radius: 16px; border: 1px solid var(--cream-200); background: #ffffff; font-family: var(--font-sans); font-size: 14px; color: var(--charcoal-900); outline: none; }
+        .form-input:focus, .form-textarea:focus { border-color: var(--blush-400); }
+
+        .modal-backdrop { position: fixed; inset: 0; z-index: 55; background: rgba(31, 28, 26, 0.55); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 16px; overflow-y: auto; }
+        .modal-card { background: var(--cream-50); border: 1px solid var(--cream-200); border-radius: 28px; max-width: 500px; width: 100%; padding: 28px 24px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.2); max-height: 90vh; overflow-y: auto; }
+        .modal-close { position: absolute; top: 18px; right: 18px; width: 36px; height: 36px; border-radius: 50%; border: none; background: var(--cream-100); color: var(--charcoal-700); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+
+        .lightbox-card { background: var(--cream-50); border-radius: 28px; max-width: 880px; width: 100%; overflow: hidden; position: relative; display: flex; flex-direction: column; max-height: 90vh; }
+        .lightbox-media { background: var(--charcoal-900); display: flex; align-items: center; justify-content: center; max-height: 55vh; }
+        .lightbox-media img, .lightbox-media video { max-width: 100%; max-height: 55vh; object-fit: contain; }
+        .lightbox-info { padding: 24px; overflow-y: auto; }
+
+        .toast-box { position: fixed; bottom: 24px; right: 24px; z-index: 70; background: var(--charcoal-900); color: var(--cream-50); padding: 12px 20px; border-radius: 16px; font-size: 13px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: flex; align-items: center; gap: 10px; transform: translateY(120px); opacity: 0; transition: all 0.3s ease; pointer-events: none; }
+        .toast-box.show { transform: translateY(0); opacity: 1; }
+
+        .site-footer { position: relative; z-index: 10; border-top: 1px solid var(--cream-200); background: var(--cream-100); padding: 48px 16px; text-align: center; }
+
+        @media (min-width: 768px) {
+            .desktop-nav { display: flex; }
+            .mobile-only-btn { display: none !important; }
+            .dates-grid { grid-template-columns: repeat(2, 1fr); }
+            .chapters-grid { grid-template-columns: repeat(2, 1fr); }
+            .memories-grid { grid-template-columns: repeat(2, 1fr); }
+            .lightbox-card { flex-direction: row; }
+            .lightbox-media { width: 60%; max-height: 85vh; }
+            .lightbox-media img, .lightbox-media video { max-height: 85vh; }
+            .lightbox-info { width: 40%; padding: 32px; }
+        }
+        @media (min-width: 1024px) {
+            .memories-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-decor">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <!-- ЭКРАН ЗАЩИТЫ КОДОМ ПАРЫ -->
+    <div id="access-gate" class="access-overlay paper-texture">
+        <div class="glass-card access-box">
+            <div class="heart-badge">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.22em; color: var(--gold-600); font-weight: 600;">Приватный альбом пары</span>
+            <h1 class="font-serif" style="font-size: 38px; font-weight: 600; color: var(--charcoal-900); margin: 4px 0 8px;">Максим <span class="italic" style="color: var(--blush-400); font-weight: 400;">&amp;</span> Даша</h1>
+            <p style="font-size: 13px; color: var(--charcoal-700); font-weight: 300; margin-bottom: 24px;">Введите общий секретный код нашей пары для доступа к облаку.</p>
+
+            <form onsubmit="handleAccessSubmit(event)">
+                <div class="form-group">
+                    <label for="couple-code-input" class="form-label">Секретный код пары</label>
+                    <div style="position: relative;">
+                        <input type="password" id="couple-code-input" required placeholder="Введите код доступа..." class="form-input" style="padding-right: 44px;">
+                        <button type="button" onclick="togglePasswordVisibility()" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; color: var(--charcoal-700); cursor: pointer;" title="Показать/скрыть">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                    <p id="access-error" class="hidden" style="font-size: 12px; color: var(--blush-500); margin-top: 6px; font-weight: 500;">Неверный код.</p>
+                </div>
+                <button type="submit" class="btn btn-dark" style="width: 100%; margin-top: 6px;">Открыть наш альбом</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ШАПКА -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo-group">
+                <a href="#" class="logo-link">М <span>&amp;</span> Д</a>
+                <div class="status-badge">
+                    <span id="cloud-dot" class="status-dot"></span>
+                    <span id="cloud-status-text">Облако активно</span>
+                </div>
+            </div>
+            <nav class="desktop-nav">
+                <a href="#dates">Наши даты</a>
+                <a href="#story">Главы истории</a>
+                <a href="#gallery">Наши моменты</a>
+            </nav>
+            <div class="header-actions">
+                <button onclick="openSettingsModal()" class="btn-icon" title="Настройки">⚙</button>
+                <button onclick="openAddModal()" class="btn btn-blush">+ Добавить</button>
+                <button onclick="toggleMobileMenu()" class="btn-icon mobile-only-btn">☰</button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu-panel hidden">
+            <a href="#dates" onclick="toggleMobileMenu()">Наши даты</a>
+            <a href="#story" onclick="toggleMobileMenu()">Главы истории</a>
+  <a href="#gallery">Наши моменты</a>
+            </nav>
+            <div class="header-actions">
+                <button onclick="openSettingsModal()" class="btn-icon" title="Настройки">⚙</button>
+                <button onclick="openAddModal()" class="btn btn-blush">+ Добавить</button>
+                <button onclick="toggleMobileMenu()" class="btn-icon mobile-only-btn">☰</button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu-panel hidden">
+            <a href="#dates" onclick="toggleMobileMenu()">Наши даты</a>
+            <a href="#story" onclick="toggleMobileMenu()">Главы истории</a>
+            <a href="#gallery" onclick="toggleMobileMenu()">Наши моменты</a>
+            <button onclick="toggleMobileMenu(); lockAlbum();" style="color: var(--blush-500);">Заблокировать</button>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero-section paper-texture">
+            <div class="container">
+                <div class="pill-tag">✦ Облачный архив в реальном времени</div>
+                <h1 class="hero-title">Максим <span>&amp;</span> Даша</h1>
+                <p class="hero-subtitle">«Две судьбы, которые однажды нашли свой общий ритм»</p>
+                <p class="hero-desc">Любое фото или видео, добавленное вами или вашей девушкой, мгновенно появляется на втором устройстве.</p>
+                <div class="hero-buttons">
+                    <a href="#gallery" class="btn btn-dark">Листать наш альбом</a>
+                    <button onclick="openAddModal()" class="btn btn-outline">Добавить фото или видео</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ДАТЫ И ТАЙМЕРЫ -->
+        <section id="dates" class="section-block">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">Отсчет времени</span>
+                    <h2 class="section-title">Две главные даты</h2>
+                </div>
+                <div class="dates-grid">
+                    <div class="glass-card date-card">
+                        <div class="date-card-top">
+                            <div>
+                                <span class="date-badge badge-gold">Знакомство</span>
+                                <h3 class="date-heading">19 мая 2023</h3>
+                                <p class="date-quote">«День, когда пересеклись наши пути»</p>
+                            </div>
+                        </div>
+                        <div id="acquaintance-summary" class="summary-pill summary-gold">Вычисляем...</div>
+                        <div class="timer-boxes">
+                            <div class="timer-unit"><div id="acq-days" class="timer-num">0</div><div class="timer-label">Дней</div></div>
+                            <div class="timer-unit"><div id="acq-hours" class="timer-num">00</div><div class="timer-label">Часов</div></div>
+                            <div class="timer-unit"><div id="acq-minutes" class="timer-num">00</div><div class="timer-label">Минут</div></div>
+                            <div class="timer-unit"><div id="acq-seconds" class="timer-num" style="color: var(--gold-500);">00</div><div class="timer-label">Секунд</div></div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card date-card blush-border">
+                        <div class="date-card-top">
+                            <div>
+                                <span class="date-badge badge-blush">Начало отношений</span>
+                                <h3 class="date-heading">2 июня 2026</h3>
+                                <p class="date-quote">«Начало нашей общей истории»</p>
+                            </div>
+                        </div>
+                        <div id="relationship-summary" class="summary-pill summary-blush">Вычисляем...</div>
+                        <div class="timer-boxes">
+                            <div class="timer-unit"><div id="rel-days" class="timer-num">0</div><div class="timer-label">Дней</div></div>
+                            <div class="timer-unit"><div id="rel-hours" class="timer-num">00</div><div class="timer-label">Часов</div></div>
+                            <div class="timer-unit"><div id="rel-minutes" class="timer-num">00</div><div class="timer-label">Минут</div></div>
+                            <div class="timer-unit"><div id="rel-seconds" class="timer-num" style="color: var(--blush-500);">00</div><div class="timer-label">Секунд</div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ГЛАВЫ ИСТОРИИ -->
+        <section id="story" class="section-block story-bg">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-kicker">О нас</span>
+                    <h2 class="section-title">Четыре главы нашей любви</h2>
+                </div>
+                <div class="glass-card quote-banner">
+                    <span style="font-size: 32px; color: var(--blush-300); font-family: Georgia, serif;">❝</span>
+                    <blockquote>«Самые глубокие чувства растут бережно и неспешно — из доверия, умения слышать друг друга и радости просто быть рядом».</blockquote>
+                    <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--gold-600); font-weight: 600;">— Максим и Даша —</div>
+                </div>
+                <div class="chapters-grid">
+                    <div class="chapter-card">
+                        <div class="chapter-top"><div class="roman-circle" style="background: var(--cream-100); color: var(--gold-600);">I</div><span style="font-size: 12px; font-weight: 600; color: var(--gold-600);">19.05.2023</span></div>
+                        <h3 class="font-serif" style="font-size: 24px; font-weight: 600; margin-bottom: 10px;">Случайность, ставшая судьбой</h3>
+                        <p style="font-size: 14px; color: var(--charcoal-700);">В этот майский день два разных мира впервые соприкоснулись, положив начало нашей дороге.</p>
+                    </div>
+                    <div class="chapter-card">
+                        <div class="chapter-top"><div class="roman-circle" style="background: var(--sage-50); color: var(--sage-600);">II</div><span style="font-size: 12px; font-weight: 600; color: var(--sage-600);">Путь навстречу</span></div>
+                        <h3 class="font-serif" style="font-size: 24px; font-weight: 600; margin-bottom: 10px;">Время, которое сблизило</h3>
+                        <p style="font-size: 14px; color: var(--charcoal-700);">Месяцы общения подарили искреннюю дружбу, взаимную поддержку и доверие друг к другу.</p>
+                    </div>
+                    <div class="chapter-card">
+                        <div class="chapter-top"><div class="roman-circle" style="background: var(--blush-100); color: var(--blush-500);">III</div><span style="font-size: 12px; font-weight: 600; color: var(--blush-500);">02.06.2026</span></div>
+                        <h3 class="font-serif" style="font-size: 24px; font-weight: 600; margin-bottom: 10px;">Новая глава: Мы</h3>
+                        <p style="font-size: 14px; color: var(--charcoal-700);">День, когда симпатия и нежность обрели общее имя, а все мечты стали едиными.</p>
+                    </div>
+                    <div class="chapter-card">
+                        <div class="chapter-top"><div class="roman-circle" style="background: var(--cream-100); color: var(--gold-600);">IV</div><span style="font-size: 12px; font-weight: 600; color: var(--gold-600);">Бесконечность</span></div>
+                        <h3 class="font-serif" style="font-size: 24px; font-weight: 600; margin-bottom: 10px;">Наше завтра</h3>
+                        <p style="font-size: 14px; color: var(--charcoal-700);">Впереди сотни счастливых мгновений, уютных вечеров и общих рассветов.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- МОМЕНТЫ (ГАЛЕРЕЯ) -->
+        <section id="gallery" class="section-block">
+            <div class="container">
+                <div class="gallery-toolbar">
+                    <div>
+                        <span class="section-kicker">Живой архив</span>
+                        <h2 class="section-title">Наши моменты</h2>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <div class="filter-group">
+                            <button onclick="setFilter('all')" id="filter-all" class="filter-btn active-filter">Все</button>
+                            <button onclick="setFilter('photo')" id="filter-photo" class="filter-btn">Фото</button>
+                            <button onclick="setFilter('video')" id="filter-video" class="filter-btn">Видео</button>
+                        </div>
+                        <button onclick="openAddModal()" class="btn btn-blush">+ Добавить запись</button>
+                    </div>
+                </div>
+                <div id="memories-grid" class="memories-grid"></div>
+                <div id="empty-state" class="glass-card hidden" style="padding: 48px; text-align: center;">
+                    <h3 class="font-serif" style="font-size: 24px;">В этой категории пока пусто</h3>
+                    <button onclick="openAddModal()" class="btn btn-blush" style="margin-top: 14px;">Добавить воспоминание</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ПОДВАЛ -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="font-serif" style="font-size: 28px; font-weight: 600; margin-bottom: 8px;">Максим <span class="italic" style="color: var(--blush-400);">&amp;</span> Даша</div>
+            <p style="font-size: 13px; color: var(--charcoal-700); margin-bottom: 12px;">19.05.2023 • 02.06.2026 • Бесконечность</p>
+            <button onclick="lockAlbum()" style="background: none; border: none; font-size: 12px; color: var(--charcoal-700); text-decoration: underline; cursor: pointer;">Заблокировать альбом</button>
+        </div>
+    </footer>
+
+    <!-- МОДАЛКИ (Добавление, Лайтбокс, Настройки) -->
+    <div id="add-modal" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <button onclick="closeAddModal()" class="modal-close">✕</button>
+            <h3 id="modal-title" class="font-serif" style="font-size: 26px; font-weight: 600; margin-bottom: 16px;">Добавить воспоминание</h3>
+            <form onsubmit="handleSaveMemory(event)">
+                <input type="hidden" id="edit-id" value="">
+                <div class="form-group">
+                    <label class="form-label">Тип</label>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <label style="padding: 10px; background: #fff; border: 1px solid var(--cream-200); border-radius: 12px; font-size: 13px; cursor: pointer;"><input type="radio" name="mediaType" value="photo" checked onchange="toggleMediaInputs()"> Фотография</label>
+                        <label style="padding: 10px; background: #fff; border: 1px solid var(--cream-200); border-radius: 12px; font-size: 13px; cursor: pointer;"><input type="radio" name="mediaType" value="video" onchange="toggleMediaInputs()"> Видеоролик</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Выбрать файл с устройства</label>
+                    <input type="file" id="media-file" accept="image/*,video/*" onchange="handleFileSelect(event)" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Или вставьте ссылку</label>
+                    <input type="url" id="media-url" placeholder="https://..." class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Дата</label>
+                    <input type="date" id="memory-date" required class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Заголовок</label>
+                    <input type="text" id="memory-title" required placeholder="Например: Наш вечер" class="form-input">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Описание</label>
+                    <textarea id="memory-caption" rows="3" required class="form-textarea" placeholder="Пара теплых строк..."></textarea>
+                </div>
+                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" onclick="closeAddModal()" class="btn btn-outline">Отмена</button>
+                    <button type="submit" class="btn btn-blush">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal-backdrop hidden">
+        <div class="modal-card" style="max-width: 400px;">
+            <button onclick="closeSettingsModal()" class="modal-close">✕</button>
+            <h3 class="font-serif" style="font-size: 24px; font-weight: 600; margin-bottom: 12px;">Настройки</h3>
+            <p style="font-size: 13px; color: var(--charcoal-700); margin-bottom: 16px;">Код пары защищает альбом. Текущий код: <b>19052023</b></p>
+            <button onclick="closeSettingsModal(); lockAlbum();" class="btn btn-outline" style="width: 100%;">Заблокировать сеанс</button>
+        </div>
+    </div>
+
+    <div id="lightbox-modal" class="modal-backdrop hidden" onclick="closeLightbox()">
+        <div class="lightbox-card" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="modal-close" style="background: rgba(0,0,0,0.6); color: #fff; z-index: 10;">✕</button>
+            <div class="lightbox-media">
+                <img id="lightbox-img" class="hidden" alt="Фото">
+                <video id="lightbox-video" class="hidden" controls playsinline></video>
+            </div>
+            <div class="lightbox-info">
+                <span id="lightbox-date" class="date-badge badge-blush"></span>
+                <h3 id="lightbox-title" class="font-serif" style="font-size: 26px; font-weight: 600; margin: 6px 0 10px;"></h3>
+                <p id="lightbox-caption" style="font-size: 14px; color: var(--charcoal-700);"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast-box"><span>♥</span><span id="toast-message">Готово</span></div>
+
+    <!-- СКРИПТ С ОБЛАЧНОЙ СИНХРОНИЗАЦИЕЙ В РЕАЛЬНОМ ВРЕМЕНИ -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, onSnapshot, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Ключи вашего облака Firebase (для реального времени между вами и девушкой)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCeIr1GkBfEtLbSIoLcMbTqz63MOTHsV3I",
+            authDomain: "love-story-611ca.firebaseapp.com",
+            projectId: "love-story-611ca",
+            storageBucket: "love-story-611ca.firebasestorage.app",
+            messagingSenderId: "557438121277",
+            appId: "1:557438121277:web:034282636b8558c39f4154"
+        };
+
+        const appId = 'maxim-dasha-love-story-v2';
+        let db = null;
+        let memories = [];
+        let currentFilter = 'all';
+        let activeCoupleCode = '19052023';
+        const SESSION_KEY = 'maxim_dasha_unlocked_v2';
+      async function initCloud() {
+            try {
+                const app = initializeApp(firebaseConfig);
+                const auth = getAuth(app);
+                db = getFirestore(app);
+                await signInAnonymously(auth);
+
+                document.getElementById('cloud-dot').style.background = '#8FA38B';
+                document.getElementById('cloud-status-text').textContent = 'Облако активно';
+
+                const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'memories');
+                onSnapshot(colRef, (snapshot) => {
+                    memories = [];
+                    snapshot.forEach(docSnap => {
+                        memories.push({ id: docSnap.id, ...docSnap.data() });
+                    });
+                    memories.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    renderMemories();
+                }, (err) => {
+                    console.error(err);
+                    showToast('Ошибка синхронизации');
+                });
+            } catch (e) {
+                console.error(e);
+                document.getElementById('cloud-status-text').textContent = 'Офлайн режим';
+            }
+        }
+
+        window.handleAccessSubmit = function(e) {
+            e.preventDefault();
+            const val = document.getElementById('couple-code-input').value.trim();
+            if (val === activeCoupleCode) {
+                sessionStorage.setItem(SESSION_KEY, 'true');
+                unlockUI();
+                showToast('Добро пожаловать!');
+            } else {
+                document.getElementById('access-error').classList.remove('hidden');
+            }
+        };
+
+        function unlockUI() {
+            const gate = document.getElementById('access-gate');
+            gate.style.opacity = '0';
+            setTimeout(() => gate.classList.add('hidden'), 400);
+        }
+
+        window.lockAlbum = function() {
+            sessionStorage.removeItem(SESSION_KEY);
+            location.reload();
+        };
+
+        window.openAddModal = () => {
+            document.getElementById('memory-form').reset();
+            document.getElementById('memory-date').valueAsDate = new Date();
+            document.getElementById('add-modal').classList.remove('hidden');
+        };
+        window.closeAddModal = () => document.getElementById('add-modal').classList.add('hidden');
+        window.openSettingsModal = () => document.getElementById('settings-modal').classList.remove('hidden');
+        window.closeSettingsModal = () => document.getElementById('settings-modal').classList.add('hidden');
+
+        window.handleSaveMemory = async function(e) {
+            e.preventDefault();
+            if (!db) {
+                showToast('Нет подключения к облаку');
+                return;
+            }
+
+            const type = document.querySelector('input[name="mediaType"]:checked').value;
+            const date = document.getElementById('memory-date').value;
+            const title = document.getElementById('memory-title').value.trim();
+            const caption = document.getElementById('memory-caption').value.trim();
+            let mediaUrl = document.getElementById('media-url').value.trim();
+
+            const fileInput = document.getElementById('media-file');
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                mediaUrl = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = (ev) => resolve(ev.target.result);
+                    reader.readAsDataURL(file);
+                });
+            }
+
+            if (!mediaUrl) {
+                mediaUrl = 'https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=800';
+            }
+
+            try {
+                const colRef = collection(db, 'artifacts', appId, 'public', 'data', 'memories');
+                await addDoc(colRef, { type, date, title, mediaUrl, caption, createdAt: Date.now() });
+                closeAddModal();
+                showToast('Момент отправлен в облако!');
+            } catch (err) {
+                console.error(err);
+                showToast('Ошибка сохранения');
+            }
+        };
+
+        window.deleteMemory = async function(id) {
+            if (!db || !confirm('Удалить воспоминание?')) return;
+            try {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'memories', id));
+                showToast('Запись удалена');
+            } catch (e) {
+                showToast('Не удалось удалить');
+            }
+        };
+
+        function renderMemories() {
+            const grid = document.getElementById('memories-grid');
+            const empty = document.getElementById('empty-state');
+            grid.innerHTML = '';
+
+            const filtered = memories.filter(m => currentFilter === 'all' || m.type === currentFilter);
+            if (filtered.length === 0) {
+                empty.classList.remove('hidden');
+                return;
+            }
+            empty.classList.add('hidden');
+
+            filtered.forEach(item => {
+                const card = document.createElement('article');
+                card.className = 'memory-card';
+                card.innerHTML = `
+                    <div class="memory-media-wrap" onclick="openLightbox('${item.id}')">
+                        ${item.type === 'video' ? `<video src="${item.mediaUrl}" muted playsinline></video>` : `<img src="${item.mediaUrl}" alt="${escapeHtml(item.title)}" loading="lazy">`}
+                    </div>
+                    <div class="memory-body">
+                        <div>
+                            <div class="memory-meta">
+                                <span class="memory-date">${item.date}</span>
+                                <button onclick="deleteMemory('${item.id}')" style="background: var(--blush-100); color: var(--blush-500); border: none; border-radius: 6px; padding: 2px 6px; font-size: 11px; cursor: pointer;">✕</button>
+                            </div>
+                            <h3 class="memory-title" onclick="openLightbox('${item.id}')">${escapeHtml(item.title)}</h3>
+                            <p class="memory-caption">${escapeHtml(item.caption)}</p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.setFilter = function(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active-filter'));
+            document.getElementById(`filter-${filter}`).classList.add('active-filter');
+            renderMemories();
+        };
+
+        window.openLightbox = function(id) {
+            const item = memories.find(m => m.id === id);
+            if (!item) return;
+            document.getElementById('lightbox-date').textContent = item.date;
+            document.getElementById('lightbox-title').textContent = item.title;
+            document.getElementById('lightbox-caption').textContent = item.caption;
+
+            const img = document.getElementById('lightbox-img');
+            const vid = document.getElementById('lightbox-video');
+
+            if (item.type === 'video') {
+                img.classList.add('hidden');
+                vid.classList.remove('hidden');
+                vid.src = item.mediaUrl;
+            } else {
+                vid.classList.add('hidden');
+                vid.pause();
+                img.classList.remove('hidden');
+                img.src = item.mediaUrl;
+            }
+            document.getElementById('lightbox-modal').classList.remove('hidden');
+        };
+
+        window.closeLightbox = function() {
+            document.getElementById('lightbox-video').pause();
+            document.getElementById('lightbox-modal').classList.add('hidden');
+        };
+
+        window.toggleMobileMenu = () => document.getElementById('mobile-menu').classList.toggle('hidden');
+        window.togglePasswordVisibility = () => {
+            const inp = document.getElementById('couple-code-input');
+            inp.type = inp.type === 'password' ? 'text' : 'password';
+        };
+
+        function updateTimers() {
+            const now = new Date();
+            const acqDiff = now - new Date(2023, 4, 19);
+            document.getElementById('acq-days').textContent = Math.floor(acqDiff / (1000 * 60 * 60 * 24));
+            document.getElementById('acq-hours').textContent = String(Math.floor((acqDiff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+            document.getElementById('acq-minutes').textContent = String(Math.floor((acqDiff / (1000 * 60)) % 60)).padStart(2, '0');
+            document.getElementById('acq-seconds').textContent = String(Math.floor((acqDiff / 1000) % 60)).padStart(2, '0');
+            document.getElementById('acquaintance-summary').textContent = `Прошло ${Math.floor(acqDiff / (1000 * 60 * 60 * 24))} дней`;
+
+            const relDiff = now - new Date(2026, 5, 2);
+            if (relDiff >= 0) {
+                document.getElementById('rel-days').textContent = Math.floor(relDiff / (1000 * 60 * 60 * 24));
+                document.getElementById('rel-hours').textContent = String(Math.floor((relDiff / (1000 * 60 * 60)) % 24)).padStart(2, '0');
+                document.getElementById('rel-minutes').textContent = String(Math.floor((relDiff / (1000 * 60)) % 60)).padStart(2, '0');
+                document.getElementById('rel-seconds').textContent = String(Math.floor((relDiff / 1000) % 60)).padStart(2, '0');
+                document.getElementById('relationship-summary').textContent = `Прошло ${Math.floor(relDiff / (1000 * 60 * 60 * 24))} дней`;
+            } else {
+                document.getElementById('relationship-summary').textContent = 'Дата в будущем!';
+            }
+        }
+
+        function escapeHtml(str) {
+            return String(str || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            document.getElementById('toast-message').textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+                unlockUI();
+            }
+            updateTimers();
+            setInterval(updateTimers, 1000);
+            initCloud();
+        });
+    </script>
+</body>
+</html>
